@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div *ngIf="cartItems.length == 0" class="alert alert-warning col-md-12">
+                Cart is Empty..
+            </div>
+            <div *ngIf="cartItems.length > 0">
+                <table class="table table-bordered">
+                    <tr>
+                        <th width="30%">Product Image</th>
+                        <th width="20%">Product Detail</th>
+                        <th width="15%">Product Quantity</th>
+                        <th width="10%">Product UnitPrice</th>
+                        <th width="15%">Product total</th>
+                        <th width="10%">Action</th>
+                    </tr>
+                    <tr *ngFor="let tempCartItem of cartItems">
+                        <td>
+                            <img src="{{tempCartItem.imageUrl}}" alt="" srcset="">
+                        </td>
+                        <td>{{tempCartItem.name}}</td>
+                        <td>
+                            <button class="btn btn-outline-warning" (click)="changeQuantity(tempCartItem,'+')"><i class="fas fa-plus">  </i></button>
+                            {{tempCartItem.quantity}}
+                            <button class="btn btn-outline-warning" (click)="changeQuantity(tempCartItem,'-')" 
+                                [disabled]="tempCartItem.quantity<=1"><i class="fas fa-minus">  </i></button>
+                        </td>
+                        <td>{{tempCartItem.unitPrice | currency:'USD'}}</td>
+                        <td>{{tempCartItem.unitPrice * tempCartItem.quantity | currency:'USD'}}</td>
+                        <td><button class="btn btn-outline-danger" (click)="remove(tempCartItem)">Remove</button></td>
+                    </tr>
+                    <tr>
+                        <p>Total Quantity: {{totalQuantity}}</p>
+                        <p>Total Price: {{totalPrice | number:'1.2'}}</p>
+                        <a routerLink="/checkout" class="btn btn-success">Checkout</a>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

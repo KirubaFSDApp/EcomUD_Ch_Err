@@ -1,0 +1,40 @@
+<main>
+  <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
+    <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3" >
+
+      <div *ngFor="let prod of productList" style="margin-top: 40px;">
+        <div class="col" >
+          <div class="card h-100 shadow-sm">
+            <a href="#" routerLink="/products/{{prod.id}}">
+              <img src="{{prod.imageUrl}}" class="card-img-top" alt="...">
+            </a>
+            <div class="card-body">
+              <a href="#" routerLink="/products/{{prod.id}}">
+              <h6 class="card-title">{{prod.name}}</h6></a>
+              <p class="card-title">{{prod.description}}</p>
+              <div class="clearfix mb-3"> 
+                <span class="float-start badge rounded-pill bg-success">
+                  {{prod.unitPrice | currency :'USD'}}</span>
+                <span class="float-end"><a href="#">{{prod.categoryName}}</a></span>
+              </div>
+              <div class="d-grid gap-2 my-1">
+                <a (click)="addToCart(prod)" class="btn btn-warning btn-sm">Add to cart</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="productList?.length==0" class="alert alert-warning col-md-12" role="alert">
+        No Product Found For Your Search...
+      </div>
+
+      
+
+    </div>
+
+    
+
+  </div>
+</main>
